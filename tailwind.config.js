@@ -10,7 +10,13 @@ module.exports = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-      },
+        neue: "#C3EBFA",
+        neuelight: "#EDF9FD",
+        nele: "#CFCEFF",
+        nelelight: "#F1F0FF",
+        neow: "#FAE27C",
+        neowlight: "#FEFCE8"
+      }
     },
   },
   plugins: [],
