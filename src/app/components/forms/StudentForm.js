@@ -131,7 +131,7 @@ export default function StudentForm({ type, data, setOpen, relatedData }) {
           label="Birth Day"
           name="birthday"
           type="date"
-          defval={data.birthday.toISOString().split("T")[0]}
+          defval={data?.birthday.toISOString().split("T")[0]}
           register={register}
           error={errors.birthday}
         />

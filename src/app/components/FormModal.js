@@ -14,7 +14,7 @@ import ResultForm from "./forms/ResultForm";
 import EventForm from "./forms/EventForm";
 import AnnouncementForm from "./forms/AnnouncementForm";
 import { useFormState } from "react-dom";
-import { deleteAnnouncement, deleteAssignment, deleteClass, deleteEvents, deleteExam, deleteParents, deleteResult, deleteStudent, deleteSubject, deleteTeacher } from "../vars/actions";
+import { deleteAnnouncement, deleteAssignment, deleteClass, deleteEvents, deleteExam, deleteLesson, deleteParents, deleteResult, deleteStudent, deleteSubject, deleteTeacher } from "../vars/actions";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
@@ -30,6 +30,7 @@ const DeleteActionMap = {
   result: deleteResult,
   event: deleteEvents,
   announcement: deleteAnnouncement,
+  lesson: deleteLesson
 };
 
 const Forms = {

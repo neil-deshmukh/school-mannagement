@@ -125,7 +125,7 @@ export default function TeacherForm({ type, data, setOpen, relatedData }) {
           register={register}
           error={errors.bloodType}
         />
-        <InputField label="birthday" name="birthday" type="date" register={register} error={errors.birthday} defval={data.birthday.toISOString().split("T")[0]} />
+        <InputField label="birthday" name="birthday" type="date" register={register} error={errors.birthday} defval={data?.birthday.toISOString().split("T")[0]} />
         <div className="flex flex-col gap-2 w-full md:w-1/4">
           <label className="text-xs text-gray-500">Sex</label>
           <select

@@ -36,6 +36,22 @@ export default async function FormContainer({ table, type, data, id }) {
             teachers: examSupervisors,
           };
           break;
+        case "exam":
+          const lessonSubjects = await prisma.subject.findMany({
+            select: { id: true, name: true },
+          });
+          const lessonClasses = await prisma.class.findMany({
+            select: { id: true, name: true },
+          });
+          const lessonSupervisors = await prisma.teacher.findMany({
+            select: { id: true, name: true, surname: true },
+          });
+          relatedData = {
+            subjects: lessonSubjects,
+            classes: lessonClasses,
+            teachers: lessonSupervisors,
+          };
+          break;
         case "result":
           const exams = await prisma.exam.findMany({
             select: { id: true, title: true },

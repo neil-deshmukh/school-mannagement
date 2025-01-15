@@ -506,6 +506,86 @@ export const deleteAssignment = async (currentState, data) => {
   }
 };
 
+//Assignements //////////////////////////////////////////
+
+export const createLesson = async (currentState, data) => {
+  try {
+    let hour = parseInt(data.time.split(":")[0]);
+    let minutes = parseInt(
+      `${data.time.split("")[3]}${data.time.split("")[4]}`
+    );
+    data.time.split("")[5] == "p" ? (hour = hour + 12) : hour;
+    data.date.setHours(hour, minutes);
+    const endTime = new Date(data.date);
+    endTime.setHours(endTime.getHours(), data.date.getMinutes() + 30);
+    await prisma.lesson.create({
+      data: {
+        name: data.name,
+        day: data.date
+          .toLocaleDateString("en-US", { weekday: "long" })
+          .toUpperCase(),
+        startTime: data.date,
+        endTime,
+        subjectId: data.subjectId,
+        classId: data.classId,
+        teacherId: data.teacherId,
+      },
+    });
+    return { success: true, error: false };
+  } catch (err) {
+    console.log(err);
+    return { success: false, error: true };
+  }
+};
+
+export const updateLesson = async (currentState, data) => {
+  try {
+  let hour = parseInt(data.time.split(":")[0]);
+    let minutes = parseInt(
+      `${data.time.split("")[3]}${data.time.split("")[4]}`
+    );
+    data.time.split("")[5] == "p" ? (hour = hour + 12) : hour;
+    data.date.setHours(hour, minutes);
+    const endTime = new Date(data.date);
+    endTime.setHours(endTime.getHours(), data.date.getMinutes() + 30);
+    await prisma.lesson.update({
+      where: {
+        id: data.id
+      },
+      data: {
+        name: data.name,
+        day: data.date
+          .toLocaleDateString("en-US", { weekday: "long" })
+          .toUpperCase(),
+        startTime: data.date,
+        endTime,
+        subjectId: data.subjectId,
+        classId: data.classId,
+        teacherId: data.teacherId,
+      },
+    });
+    
+    return { success: true, error: false };
+  } catch (err) {
+    console.log(err);
+    return { success: false, error: true };
+  }
+};
+
+export const deleteLesson = async (currentState, data) => {
+  try {
+    await prisma.lesson.delete({
+      where: {
+        id: data.id
+      }
+    })
+    return { success: true, error: false };
+  } catch (err) {
+    console.log(err);
+    return { success: false, error: true };
+  }
+};
+
 //Parents //////////////////////////////////////////
 
 export const createParents = async (currentState, data) => {
