@@ -33,7 +33,7 @@ export default function AnnouncementForm({ type, data, setOpen, relatedData }) {
     useEffect(() => {
       if (state.success) {
         toast.success(
-          `Result has been ${type === "plus" ? "created" : "updated"}!`
+          `Announcement has been ${type === "plus" ? "created" : "updated"}!`
         );
         setOpen(false);
         router.refresh();
@@ -43,7 +43,7 @@ export default function AnnouncementForm({ type, data, setOpen, relatedData }) {
   const { classes } = relatedData
   return (
     <form className="flex flex-col gap-8" onSubmit={onSubmit}>
-      <h1 className="text-xl font-semibold">Create a new annnouncements</h1>
+      <h1 className="text-xl font-semibold">Create a new annnouncement</h1>
       <div className="flex justify-between flex-wrap gap-4">
         <InputField
           label="Title"

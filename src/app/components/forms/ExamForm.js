@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 
 const schema = z.object({
   id: z.coerce.string().optional(),
-  title: z.string().min(1, { message: "Subject Name is required!" }),
+  title: z.string().min(1, { message: "Exam title is required!" }),
   subjectId: z.coerce.number().min(1, { message: "Subject is required" }),
   classId: z.coerce.number().min(1, { message: "Class is required" }),
   teacherId: z.string().min(1, { message: "Teacher Id is required" }),
@@ -35,7 +35,7 @@ export default function ExamForm({ type, data, setOpen, relatedData }) {
     useEffect(() => {
       if (state.success) {
         toast.success(
-          `Subject has been ${type === "plus" ? "created" : "updated"}!`
+          `Exam has been ${type === "plus" ? "created" : "updated"}!`
         );
         setOpen(false);
         router.refresh();

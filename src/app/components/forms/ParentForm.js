@@ -46,7 +46,7 @@ export default function ParentForm({ type, data, setOpen }) {
   useEffect(() => {
     if (state.success) {
       toast.success(
-        `Teacher has been ${type === "plus" ? "created" : "updated"}!`
+        `Parent has been ${type === "plus" ? "created" : "updated"}!`
       );
       setOpen(false);
       router.refresh();

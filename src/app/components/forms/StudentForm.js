@@ -49,7 +49,7 @@ export default function StudentForm({ type, data, setOpen, relatedData }) {
   useEffect(() => {
     if (state.success) {
       toast.success(
-        `Teacher has been ${type === "plus" ? "created" : "updated"}!`
+        `Student has been ${type === "plus" ? "created" : "updated"}!`
       );
       setOpen(false);
       router.refresh();

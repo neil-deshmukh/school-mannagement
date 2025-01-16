@@ -13,7 +13,7 @@ import { createAssignment, updateAssignment } from "@/app/vars/actions";
 
 const schema = z.object({
   id: z.coerce.string().optional(),
-  title: z.string().min(1, { message: "Subject Name is required!" }),
+  title: z.string().min(1, { message: "Assignment Name is required!" }),
   subjectId: z.coerce.number().min(1, { message: "Subject is required" }),
   classId: z.coerce.number().min(1, { message: "Class is required" }),
   teacherId: z.string().min(1, { message: "Teacher Id is required" }),
@@ -46,7 +46,7 @@ export default function AssignmentForm({ type, data, setOpen, relatedData }) {
   const { subjects, classes, teachers } = relatedData;
   return (
     <form className="flex flex-col gap-8" onSubmit={onSubmit}>
-      <h1 className="text-xl font-semibold">Create a new assignments</h1>
+      <h1 className="text-xl font-semibold">Create a new assignment</h1>
       <div className="flex justify-between flex-wrap gap-4">
         <InputField
           label="Assignment Title"
