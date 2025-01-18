@@ -9,6 +9,7 @@ import { useFormState } from "react-dom";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
+import { createLesson, updateLesson } from "@/app/vars/actions";
 
 const schema = z.object({
   id: z.coerce.string().optional(),
@@ -20,10 +21,10 @@ const schema = z.object({
   time: z.string().regex(/\d\d:\d\d[pa]m/i),
 });
 
-export default function LessonForm({ type, data }) {
+export default function LessonForm({ type, data, setOpen, relatedData }) {
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(schema) })
     const [state, formAction] = useFormState(
-      type === "plus" ? createExam : updateExam,
+      type === "plus" ? createLesson : updateLesson,
       { success: false, error: false }
     );
     const onSubmit = handleSubmit((datad) => {
@@ -41,7 +42,8 @@ export default function LessonForm({ type, data }) {
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [state]);
-    const { subjects, classes, teachers } = relatedData;
+  const { subjects, classes, teachers } = relatedData;
+  console.log(subjects)
   return (
     <form className="flex flex-col gap-8" onSubmit={onSubmit}>
       <h1 className="text-xl font-semibold">Create a new lesson</h1>
@@ -57,7 +59,7 @@ export default function LessonForm({ type, data }) {
           label="Date"
           name="date"
           type="date"
-          defval={data?.startDate.toISOString().split("T")[0]}
+          defval={data?.startTime.toISOString().split("T")[0]}
           register={register}
           error={errors.date}
         />
@@ -66,11 +68,11 @@ export default function LessonForm({ type, data }) {
           name="time"
           defval={
             data
-              ? `${data?.startDate.toLocaleTimeString("en-GB", {
+              ? `${data?.startTime.toLocaleTimeString("en-GB", {
                   hour: "2-digit",
                 minute: "2-digit",
                   hour12: true
-                }).split("").map(char => {if(char == "a" || char == "p" || char == "m" || char == " ") {return ""} else {return char}}).join("")}${data?.startDate.getHours() > 12 ? "pm" : "am"}`
+                }).split("").map(char => {if(char == "a" || char == "p" || char == "m" || char == " ") {return ""} else {return char}}).join("")}${data?.startTime.getHours() > 12 ? "pm" : "am"}`
               : ""
           }
           register={register}
@@ -83,11 +85,12 @@ export default function LessonForm({ type, data }) {
             {...register("subjectId")}
           >
             {subjects.map((subject) => {
+              console.log(subject)
               return (
                 <option
                   key={subject.id}
                   value={subject.id}
-                  selected={subject.id == data?.lesson.subject.id}
+                  selected={subject.id == data?.subject.id}
                 >
                   {subject.name}
                 </option>
@@ -111,7 +114,7 @@ export default function LessonForm({ type, data }) {
                 <option
                   key={classs.id}
                   value={classs.id}
-                  selected={classs.id == data?.lesson.class.id}
+                  selected={classs.id == data?.class.id}
                 >
                   {classs.name}
                 </option>
@@ -135,7 +138,7 @@ export default function LessonForm({ type, data }) {
                 <option
                   key={teacher.id}
                   value={teacher.id}
-                  selected={teacher.id == data?.lesson.teacher.id}
+                  selected={teacher.id == data?.teacher.id}
                 >
                   {teacher.name + " " + teacher.surname}
                 </option>

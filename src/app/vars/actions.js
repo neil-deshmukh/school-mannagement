@@ -550,7 +550,7 @@ export const updateLesson = async (currentState, data) => {
     endTime.setHours(endTime.getHours(), data.date.getMinutes() + 30);
     await prisma.lesson.update({
       where: {
-        id: data.id
+        id: parseInt(data.id)
       },
       data: {
         name: data.name,
@@ -576,7 +576,7 @@ export const deleteLesson = async (currentState, data) => {
   try {
     await prisma.lesson.delete({
       where: {
-        id: data.id
+        id: parseInt(data.id)
       }
     })
     return { success: true, error: false };

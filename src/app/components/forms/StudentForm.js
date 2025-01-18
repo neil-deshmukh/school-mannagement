@@ -116,7 +116,7 @@ export default function StudentForm({ type, data, setOpen, relatedData }) {
         <InputField
           label="Address"
           name="address"
-          defval={data?.addresss}
+          defval={data?.address}
           register={register}
           error={errors.address}
         />

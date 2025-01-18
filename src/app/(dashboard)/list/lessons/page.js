@@ -7,6 +7,7 @@ import prisma from "@/app/vars/prisma";
 import { ITEM_PER_PAGE } from "@/app/vars/settings";
 import Image from "next/image";
 import Link from "next/link";
+import FormContainer from "@/app/components/FormContainer";
 
 
 
@@ -25,8 +26,8 @@ const renderRow = (item) => {
         <div className="flex items-center gap-2">
           {role == "admin" && (
             <>
-              <FormModal table="lesson" type="edit" data={item} />
-              <FormModal table="lesson" type="delete" id={item.id} />
+              <FormContainer table="lesson" type="edit" data={item} />
+              <FormContainer table="lesson" type="delete" id={item.id} />
             </>
           )}
         </div>
@@ -117,7 +118,7 @@ export default async function LessonsList({ searchParams }) {
               <Image src="/sort.png" alt="Button" width={14} height={14} />
             </button>
             {(role == "admin" || role == "teacher") && (
-              <FormModal table="lesson" type="plus" />
+              <FormContainer table="lesson" type="plus" />
             )}
           </div>
         </div>

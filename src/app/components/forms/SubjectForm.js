@@ -62,7 +62,6 @@ export default function SubjectForm({ type, data, setOpen, relatedData }) {
           <select
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
             {...register("teacher")}
-            defaultValue={data?.teacher}
             multiple
           >
             {relatedData?.teachers.map((teacher, i) => {
@@ -70,6 +69,7 @@ export default function SubjectForm({ type, data, setOpen, relatedData }) {
                 <option
                   key={teacher.id}
                   value={teacher.id}
+                  selected={data?.teachers.reduce((acc, cur) => acc.push(cur.id), []).includes(teacher.id)}
                 >{`${teacher.name} ${teacher.surname}`}</option>
               );
             })}

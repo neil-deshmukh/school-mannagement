@@ -28,6 +28,10 @@ export default async function SingleTeacher({ params }) {
   if (!teacher) {
     return notFound()
   }
+  let ending = "";
+  if (teacher?.classes && teacher.classes[0].gradeId == "1") ending = "st";
+  if (teacher?.classes && teacher.classes[0].gradeId == "2") ending = "nd";
+  if (teacher?.classes && teacher.classes[0].gradeId == "3") { ending = "rd" } else if (!ending && teacher?.classes) {ending = "th"}
   return (
     <div className="p-4 flex flex-col lg:flex-row gap-4">
       <div className="w-full lg:w-2/3">
@@ -86,7 +90,7 @@ export default async function SingleTeacher({ params }) {
                 className="w-6 h-6"
               />
               <div>
-                <h1 className="text-xl font-semibold">90%</h1>
+                <h1 className="text-xl font-semibold">{ending ? teacher.classes[0].gradeId + ending : "-"}%</h1>
                 <span className="text-sm text-gray-400">Grade</span>
               </div>
             </div>
